@@ -1,97 +1,490 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Oswaldo PUBG UC Shop</title>
+<meta name="theme-color" content="#08091a">
+<title>Oswaldo Cyber UC Arena</title>
 <style>
+:root{
+  --bg:#08091a;
+  --panel:#11142a;
+  --blue:#00d9ff;
+  --purple:#a855f7;
+  --white:#f4f7ff;
+  --muted:#aab3d3;
+}
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f1f6ff;color:#172554}
-header{background:#123e9c;color:white;padding:28px 16px;text-align:center}
-header h1{margin:0 0 8px}
-header p{margin:0;color:#dbeafe}
-main{max-width:650px;margin:20px auto;padding:0 14px}
-.card{background:white;padding:20px;margin-bottom:16px;border-radius:16px;box-shadow:0 4px 18px #123e9c12}
-h2{margin-top:0;color:#1746a2}
-label{display:block;margin-top:14px;font-weight:bold}
-input,select,textarea{width:100%;padding:12px;margin-top:6px;border:1px solid #cbd5e1;border-radius:9px;font-size:16px;background:white}
-button{width:100%;padding:14px;background:#1759d1;color:white;border:0;border-radius:10px;font-size:16px;font-weight:bold;margin-top:18px}
-.product{padding:12px;border:1px solid #dbeafe;border-radius:10px;margin:10px 0;display:flex;justify-content:space-between;gap:10px}
-.price{color:#1759d1;font-weight:bold;white-space:nowrap}
-.note{font-size:13px;color:#64748b;line-height:1.6}
-footer{text-align:center;padding:20px;color:#64748b;font-size:13px}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  color:var(--white);
+  background:
+    radial-gradient(ellipse at 15% 10%,#15295d 0,transparent 38%),
+    radial-gradient(ellipse at 90% 35%,#341451 0,transparent 35%),
+    var(--bg);
+  background-attachment:fixed;
+}
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.17;
+  z-index:-1;
+  background-image:linear-gradient(#536bff25 1px,transparent 1px),
+    linear-gradient(90deg,#536bff25 1px,transparent 1px);
+  background-size:32px 32px;
+}
+header{
+  text-align:center;
+  padding:36px 16px 28px;
+  border-bottom:1px solid #00d9ff66;
+  background:linear-gradient(120deg,#08091a,#17123a,#081b36);
+  background-size:250% 250%;
+  animation:bgmove 8s ease infinite;
+}
+@keyframes bgmove{
+  0%,100%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+}
+.logo{
+  font-size:clamp(25px,7vw,42px);
+  font-weight:1000;
+  letter-spacing:2px;
+  margin:0;
+  color:white;
+  text-shadow:0 0 8px var(--blue),0 0 22px var(--blue),0 0 40px var(--purple);
+  animation:glow 2s ease-in-out infinite alternate;
+}
+@keyframes glow{
+  from{filter:brightness(.85);text-shadow:0 0 8px var(--blue),0 0 20px var(--blue)}
+  to{filter:brightness(1.25);text-shadow:0 0 12px var(--blue),0 0 30px var(--purple),0 0 45px var(--purple)}
+}
+header p{color:#c7d8ff;margin:12px 0 0}
+.pill{
+  display:inline-block;
+  border:1px solid var(--blue);
+  border-radius:30px;
+  padding:7px 12px;
+  color:var(--blue);
+  font-size:12px;
+  letter-spacing:1px;
+  margin-top:18px;
+  box-shadow:0 0 12px #00d9ff33;
+}
+nav{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:9px;
+  padding:14px 10px;
+  position:sticky;
+  top:0;
+  z-index:5;
+  background:#08091aeF;
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid #ffffff16;
+}
+nav a{
+  color:white;
+  text-decoration:none;
+  padding:9px 12px;
+  border:1px solid #6a6cff55;
+  border-radius:8px;
+  font-size:13px;
+}
+nav a:hover{border-color:var(--blue);box-shadow:0 0 12px #00d9ff44}
+main{max-width:760px;margin:22px auto;padding:0 13px}
+.card{
+  position:relative;
+  overflow:hidden;
+  padding:20px;
+  margin-bottom:19px;
+  border-radius:16px;
+  background:linear-gradient(145deg,#141832f5,#0c1024f5);
+  border:1px solid #7776ff66;
+  box-shadow:0 0 20px #5d35ff15,inset 0 0 20px #00d9ff05;
+}
+.card:before{
+  content:"";
+  position:absolute;
+  top:0;left:-120%;
+  width:65%;height:1px;
+  background:linear-gradient(90deg,transparent,var(--blue),var(--purple),transparent);
+  animation:scan 6s linear infinite;
+}
+@keyframes scan{to{left:150%}}
+h2{margin:0 0 16px;color:var(--blue);font-size:21px}
+.subtitle{color:var(--muted);font-size:13px;line-height:1.6}
+.product{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  padding:14px 12px;
+  margin:9px 0;
+  border:1px solid #5665b955;
+  border-radius:10px;
+  background:#111a35;
+  transition:transform .2s,border-color .2s,box-shadow .2s;
+}
+.product:hover{
+  transform:translateX(4px);
+  border-color:var(--blue);
+  box-shadow:0 0 14px #00d9ff22;
+}
+.price{color:#66eaff;font-weight:bold;white-space:nowrap}
+label{display:block;margin:14px 0 6px;font-weight:bold;font-size:14px}
+input,select,textarea{
+  width:100%;
+  padding:13px;
+  border-radius:9px;
+  border:1px solid #505a91;
+  background:#090d20;
+  color:white;
+  font-size:16px;
+  outline:none;
+}
+input:focus,select:focus,textarea:focus{
+  border-color:var(--blue);
+  box-shadow:0 0 12px #00d9ff30;
+}
+option{background:#11142a;color:white}
+button{
+  cursor:pointer;
+  width:100%;
+  padding:14px;
+  margin-top:13px;
+  border:1px solid #71f1ff;
+  border-radius:10px;
+  color:#06101c;
+  background:linear-gradient(100deg,var(--blue),#8c70ff);
+  font-weight:900;
+  font-size:15px;
+  box-shadow:0 0 16px #00d9ff33;
+  transition:transform .2s,filter .2s;
+}
+button:hover{transform:translateY(-2px);filter:brightness(1.15)}
+button:active{transform:scale(.98)}
+button.secondary{
+  color:white;
+  background:#171a38;
+  border-color:#8d7bff;
+  box-shadow:0 0 12px #8d7bff22;
+}
+.stats{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin:14px 0;
+}
+.stat{
+  background:#090d20;
+  border:1px solid #6865b966;
+  padding:14px 8px;
+  text-align:center;
+  border-radius:10px;
+}
+.stat small{display:block;color:var(--muted);margin-bottom:7px}
+.stat strong{font-size:23px;color:var(--blue)}
+.gamebox{
+  border:1px solid #554c9a;
+  border-radius:12px;
+  padding:15px;
+  margin-top:15px;
+  background:linear-gradient(130deg,#0b1026,#1a1232);
+}
+.gamebox h3{margin:0 0 7px;color:#d8c6ff}
+.game-display{
+  text-align:center;
+  font-size:43px;
+  padding:15px 0;
+  min-height:90px;
+  filter:drop-shadow(0 0 9px #00d9ff66);
+}
+.spinning{animation:spin 1.5s ease-out}
+@keyframes spin{to{transform:rotate(720deg)}}
+.result{
+  text-align:center;
+  min-height:22px;
+  margin:12px 0 0;
+  font-weight:bold;
+  color:#c4f8ff;
+  overflow-wrap:anywhere;
+}
+.history{
+  padding-left:20px;
+  color:#d2d8f1;
+  font-size:13px;
+  line-height:1.8;
+  overflow-wrap:anywhere;
+}
+.note{color:var(--muted);font-size:12px;line-height:1.6}
+footer{text-align:center;padding:24px;color:#8995bb;font-size:12px}
+@media(min-width:600px){
+  .gamegrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .gamebox{margin-top:0}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}
+}
 </style>
 </head>
 <body>
+
 <header>
-<h1>OSWALDO PUBG UC SHOP</h1>
-<p>Your PUBG Mobile UC Store</p>
+  <h1 class="logo">OSWALDO CYBER</h1>
+  <p>PUBG MOBILE UC ARENA</p>
+  <div class="pill">⚡ NEON GAMING ZONE ⚡</div>
 </header>
 
+<nav>
+  <a href="#shop">UC SHOP</a>
+  <a href="#games">MINI GAMES</a>
+  <a href="#order">ORDER UC</a>
+</nav>
+
 <main>
-<section class="card">
-<h2>🎮 PUBG Mobile UC Prices</h2>
-<div class="product"><span>60 UC</span><span class="price">4,200 Ks</span></div>
-<div class="product"><span>120 UC</span><span class="price">8,300 Ks</span></div>
-<div class="product"><span>325 UC</span><span class="price">20,800 Ks</span></div>
-<div class="product"><span>660 UC</span><span class="price">41,500 Ks</span></div>
-<div class="product"><span>720 UC</span><span class="price">45,500 Ks</span></div>
-<div class="product"><span>1,800 UC</span><span class="price">103,500 Ks</span></div>
-<div class="product"><span>3,850 UC</span><span class="price">206,000 Ks</span></div>
-<div class="product"><span>8,100 UC</span><span class="price">410,000 Ks</span></div>
+<section class="card" id="shop">
+  <h2>⚡ PUBG UC STORE</h2>
+  <p class="subtitle">Choose your PUBG Mobile UC package. All prices are in Myanmar Kyats (Ks).</p>
+  <div class="product"><span>60 UC</span><span class="price">4,200 Ks</span></div>
+  <div class="product"><span>120 UC</span><span class="price">8,300 Ks</span></div>
+  <div class="product"><span>325 UC</span><span class="price">20,800 Ks</span></div>
+  <div class="product"><span>660 UC</span><span class="price">41,500 Ks</span></div>
+  <div class="product"><span>720 UC</span><span class="price">45,500 Ks</span></div>
+  <div class="product"><span>1,800 UC</span><span class="price">103,500 Ks</span></div>
+  <div class="product"><span>3,850 UC</span><span class="price">206,000 Ks</span></div>
+  <div class="product"><span>8,100 UC</span><span class="price">410,000 Ks</span></div>
 </section>
 
-<section class="card">
-<h2>🛒 Order PUBG UC</h2>
-<form id="orderForm">
-<label>Choose your UC package</label>
-<select id="package" required>
-<option value="">Select a package</option>
-<option>60 UC - 4,200 Ks</option>
-<option>120 UC - 8,300 Ks</option>
-<option>325 UC - 20,800 Ks</option>
-<option>660 UC - 41,500 Ks</option>
-<option>720 UC - 45,500 Ks</option>
-<option>1,800 UC - 103,500 Ks</option>
-<option>3,850 UC - 206,000 Ks</option>
-<option>8,100 UC - 410,000 Ks</option>
-</select>
+<section class="card" id="games">
+  <h2>🎮 CYBER MINI GAMES</h2>
+  <p class="subtitle">Play with free demo points. These points have no cash or UC value and cannot be purchased, transferred, or withdrawn. Games are for entertainment only.</p>
 
-<label>PUBG Player ID</label>
-<input id="playerId" required placeholder="Enter your PUBG Player ID">
+  <div class="stats">
+    <div class="stat"><small>FREE DEMO POINTS</small><strong id="balance">1000</strong></div>
+    <div class="stat"><small>GAMES PLAYED</small><strong id="played">0</strong></div>
+  </div>
 
-<label>Server ID (if required)</label>
-<input id="serverId" placeholder="Enter Server ID if needed">
+  <label for="stake">Demo points per round</label>
+  <select id="stake">
+    <option value="10">10 demo points</option>
+    <option value="25">25 demo points</option>
+    <option value="50">50 demo points</option>
+    <option value="100">100 demo points</option>
+  </select>
 
-<label>Your Telegram username</label>
-<input id="telegram" required placeholder="@YourUsername">
+  <div class="gamegrid">
+    <div class="gamebox">
+      <h3>🎡 Lucky Wheel</h3>
+      <p class="subtitle">Spin for a chance to double your demo stake.</p>
+      <div class="game-display" id="wheelDisplay">🎡</div>
+      <button type="button" onclick="playWheel()">SPIN WHEEL</button>
+      <p class="result" id="wheelResult" aria-live="polite">Ready to play</p>
+    </div>
 
-<label>Additional details (optional)</label>
-<textarea id="details" rows="3" placeholder="Write an optional message"></textarea>
+    <div class="gamebox">
+      <h3>🎲 Dice Roll</h3>
+      <p class="subtitle">Choose HIGH (4–6) or LOW (1–3). Correct guesses double the demo stake.</p>
+      <label for="diceChoice">Your prediction</label>
+      <select id="diceChoice">
+        <option value="high">HIGH (4, 5, 6)</option>
+        <option value="low">LOW (1, 2, 3)</option>
+      </select>
+      <div class="game-display" id="diceDisplay">🎲</div>
+      <button type="button" onclick="playDice()">ROLL DICE</button>
+      <p class="result" id="diceResult" aria-live="polite">Make your prediction</p>
+    </div>
 
-<button type="submit">Order Now via Telegram</button>
-</form>
-<p class="note">Your order details will open in Telegram for you to review and send. This website does not collect payments or automatically deliver UC.</p>
+    <div class="gamebox">
+      <h3>🪙 Coin Flip</h3>
+      <p class="subtitle">Choose heads or tails. A correct guess doubles the demo stake.</p>
+      <label for="coinChoice">Your prediction</label>
+      <select id="coinChoice">
+        <option value="heads">HEADS</option>
+        <option value="tails">TAILS</option>
+      </select>
+      <div class="game-display" id="coinDisplay">🪙</div>
+      <button type="button" onclick="playCoin()">FLIP COIN</button>
+      <p class="result" id="coinResult" aria-live="polite">Make your prediction</p>
+    </div>
+
+    <div class="gamebox">
+      <h3>✨ Demo Points</h3>
+      <p class="subtitle">Your starting balance is 1,000 free demo points on this browser.</p>
+      <button type="button" class="secondary" onclick="claimDemo()">CLAIM 100 FREE POINTS</button>
+      <button type="button" class="secondary" onclick="resetDemo()">RESET DEMO BALANCE</button>
+      <p class="note">Free points are limited to one claim per day on this browser. Resetting restores the starting balance and clears game history.</p>
+      <p class="result" id="bonusResult" aria-live="polite"></p>
+    </div>
+  </div>
+
+  <h3>📜 Recent Game History</h3>
+  <ul class="history" id="history"><li>No games played yet.</li></ul>
+</section>
+
+<section class="card" id="order">
+  <h2>🛒 ORDER PUBG UC</h2>
+  <p class="subtitle">Complete your details and review the order in Telegram.</p>
+  <form id="orderForm">
+    <label for="package">Choose your UC package</label>
+    <select id="package" required>
+      <option value="">Select a package</option>
+      <option>60 UC - 4,200 Ks</option>
+      <option>120 UC - 8,300 Ks</option>
+      <option>325 UC - 20,800 Ks</option>
+      <option>660 UC - 41,500 Ks</option>
+      <option>720 UC - 45,500 Ks</option>
+      <option>1,800 UC - 103,500 Ks</option>
+      <option>3,850 UC - 206,000 Ks</option>
+      <option>8,100 UC - 410,000 Ks</option>
+    </select>
+
+    <label for="playerId">PUBG Player ID</label>
+    <input id="playerId" required inputmode="numeric" placeholder="Enter your PUBG Player ID">
+
+    <label for="serverId">Server ID (if required)</label>
+    <input id="serverId" placeholder="Enter Server ID if needed">
+
+    <label for="telegram">Your Telegram username</label>
+    <input id="telegram" required placeholder="@YourUsername">
+
+    <label for="details">Additional details (optional)</label>
+    <textarea id="details" rows="3" placeholder="Optional message"></textarea>
+
+    <button type="submit">ORDER NOW VIA TELEGRAM</button>
+  </form>
+  <p class="note">This website does not take payments or deliver UC automatically. Check all details with the seller before paying.</p>
 </section>
 </main>
 
-<footer>© 2026 Oswaldo PUBG UC Shop</footer>
+<footer>© 2026 Oswaldo Cyber UC Arena · PUBG Mobile UC only</footer>
 
 <script>
+const startingBalance = 1000;
+let balance = loadNumber("cyberBalance", startingBalance);
+let played = loadNumber("cyberPlayed", 0);
+let history = loadHistory();
+
+function loadNumber(key, fallback){
+  const value = Number(localStorage.getItem(key));
+  return Number.isFinite(value) && value >= 0 ? value : fallback;
+}
+function loadHistory(){
+  try{
+    const value = JSON.parse(localStorage.getItem("cyberHistory") || "[]");
+    return Array.isArray(value) ? value.slice(0,8) : [];
+  }catch(e){return [];}
+}
+function saveGameData(){
+  localStorage.setItem("cyberBalance", String(balance));
+  localStorage.setItem("cyberPlayed", String(played));
+  localStorage.setItem("cyberHistory", JSON.stringify(history));
+}
+function render(){
+  document.getElementById("balance").textContent = balance;
+  document.getElementById("played").textContent = played;
+  const list = document.getElementById("history");
+  list.replaceChildren();
+  if(history.length === 0){
+    const item = document.createElement("li");
+    item.textContent = "No games played yet.";
+    list.appendChild(item);
+  }else{
+    history.forEach(entry=>{
+      const item = document.createElement("li");
+      item.textContent = entry;
+      list.appendChild(item);
+    });
+  }
+}
+function getStake(){
+  return Number(document.getElementById("stake").value);
+}
+function playRound(gameName, resultText, won, resultElement){
+  const stake = getStake();
+  if(balance < stake){
+    resultElement.textContent = "Not enough demo points. Claim free points or reset the demo.";
+    return;
+  }
+  balance -= stake;
+  if(won) balance += stake * 2;
+  played++;
+  const message = gameName + ": " + resultText + (won ? " — WIN +" + stake : " — LOST " + stake) + " demo points";
+  resultElement.textContent = message;
+  history.unshift(message);
+  history = history.slice(0,8);
+  saveGameData();
+  render();
+}
+function animateDisplay(id, finalValue, animationClass){
+  const el = document.getElementById(id);
+  el.classList.remove("spinning");
+  void el.offsetWidth;
+  el.classList.add(animationClass || "spinning");
+  el.textContent = finalValue;
+  setTimeout(()=>el.classList.remove("spinning"),1600);
+}
+function playWheel(){
+  const won = Math.random() < 0.4;
+  const result = won ? "✨ WIN ✨" : "💥 TRY AGAIN";
+  animateDisplay("wheelDisplay", result, "spinning");
+  playRound("Lucky Wheel", result, won, document.getElementById("wheelResult"));
+}
+function playDice(){
+  const roll = Math.floor(Math.random()*6)+1;
+  const choice = document.getElementById("diceChoice").value;
+  const won = (choice === "high" && roll >= 4) || (choice === "low" && roll <= 3);
+  const faces = ["⚀","⚁","⚂","⚃","⚄","⚅"];
+  const result = faces[roll-1] + " Rolled " + roll + " (" + (roll >= 4 ? "HIGH" : "LOW") + ")";
+  animateDisplay("diceDisplay", faces[roll-1], "spinning");
+  playRound("Dice", result, won, document.getElementById("diceResult"));
+}
+function playCoin(){
+  const result = Math.random() < 0.5 ? "heads" : "tails";
+  const choice = document.getElementById("coinChoice").value;
+  const won = choice === result;
+  const emoji = result === "heads" ? "👑" : "🌙";
+  animateDisplay("coinDisplay", emoji, "spinning");
+  playRound("Coin Flip", result.toUpperCase(), won, document.getElementById("coinResult"));
+}
+function claimDemo(){
+  const key = "cyberLastBonus";
+  const today = new Date().toISOString().slice(0,10);
+  if(localStorage.getItem(key) === today){
+    document.getElementById("bonusResult").textContent = "You've already claimed today's bonus on this browser.";
+    return;
+  }
+  balance += 100;
+  localStorage.setItem(key, today);
+  saveGameData();
+  render();
+  document.getElementById("bonusResult").textContent = "+100 free demo points added!";
+}
+function resetDemo(){
+  if(!confirm("Reset your demo points to 1,000 and clear game history?")) return;
+  balance = startingBalance;
+  played = 0;
+  history = [];
+  saveGameData();
+  render();
+  document.getElementById("bonusResult").textContent = "Demo balance reset.";
+}
 document.getElementById("orderForm").addEventListener("submit",function(e){
-e.preventDefault();
-
-const msg="NEW PUBG UC ORDER - OSWALDO SHOP\n"+
-"Package: "+document.getElementById("package").value+"\n"+
-"Player ID: "+document.getElementById("playerId").value+"\n"+
-"Server ID: "+document.getElementById("serverId").value+"\n"+
-"Customer Telegram: "+document.getElementById("telegram").value+"\n"+
-"Details: "+document.getElementById("details").value;
-
-const url="https://t.me/Oswaldo301?text="+encodeURIComponent(msg);
-window.location.href=url;
+  e.preventDefault();
+  const msg = "NEW PUBG UC ORDER - OSWALDO CYBER SHOP\n" +
+    "Package: " + document.getElementById("package").value + "\n" +
+    "Player ID: " + document.getElementById("playerId").value + "\n" +
+    "Server ID: " + document.getElementById("serverId").value + "\n" +
+    "Customer Telegram: " + document.getElementById("telegram").value + "\n" +
+    "Details: " + document.getElementById("details").value;
+  const url = "https://t.me/Oswaldo301?text=" + encodeURIComponent(msg);
+  window.location.href = url;
 });
+render();
 </script>
 </body>
-</html>
+        </html>
