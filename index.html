@@ -1,1 +1,98 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oswaldo Digital Shop</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f1f6ff;color:#172554}
+header{background:#123e9c;color:white;padding:25px 16px;text-align:center}
+header h1{margin:0 0 8px}
+header p{margin:0;color:#dbeafe}
+main{max-width:650px;margin:20px auto;padding:0 14px}
+.card{background:white;padding:20px;margin-bottom:16px;border-radius:16px;box-shadow:0 4px 18px #123e9c12}
+h2{margin-top:0;color:#1746a2}
+label{display:block;margin-top:14px;font-weight:bold}
+input,select,textarea{width:100%;padding:12px;margin-top:6px;border:1px solid #cbd5e1;border-radius:9px;font-size:16px;background:white}
+button{width:100%;padding:14px;background:#1759d1;color:white;border:0;border-radius:10px;font-size:16px;font-weight:bold;margin-top:18px}
+.product{padding:12px;border:1px solid #dbeafe;border-radius:10px;margin:10px 0}
+.price{color:#1759d1;font-weight:bold}
+.note{font-size:13px;color:#64748b;line-height:1.6}
+footer{text-align:center;padding:20px;color:#64748b;font-size:13px}
+</style>
+</head>
+<body>
+<header>
+<h1>OSWALDO DIGITAL SHOP</h1>
+<p>PUBG UC & Mobile Legends Diamonds</p>
+</header>
+<main>
+<section class="card">
+<h2>🎮 PUBG Mobile UC</h2>
+<div class="product">60 UC — <span class="price">4,200 Ks</span></div>
+<div class="product">120 UC — <span class="price">8,300 Ks</span></div>
+<div class="product">325 UC — <span class="price">20,800 Ks</span></div>
+<div class="product">660 UC — <span class="price">41,500 Ks</span></div>
+<div class="product">720 UC — <span class="price">45,500 Ks</span></div>
+<div class="product">1,800 UC — <span class="price">103,500 Ks</span></div>
+<div class="product">3,850 UC — <span class="price">206,000 Ks</span></div>
+<div class="product">8,100 UC — <span class="price">410,000 Ks</span></div>
+</section>
+<section class="card">
+<h2>💎 Mobile Legends Diamonds</h2>
+<p>Please contact the seller to confirm the latest price.</p>
+</section>
+<section class="card">
+<h2>🛒 Place Your Order</h2>
+<form id="orderForm">
+<label>Game</label>
+<select id="game" required>
+<option value="">Choose a game</option>
+<option>PUBG Mobile</option>
+<option>Mobile Legends</option>
+</select>
+<label>Package</label>
+<select id="package" required>
+<option value="">Choose a package</option>
+<option>60 UC - 4,200 Ks</option>
+<option>120 UC - 8,300 Ks</option>
+<option>325 UC - 20,800 Ks</option>
+<option>660 UC - 41,500 Ks</option>
+<option>720 UC - 45,500 Ks</option>
+<option>1,800 UC - 103,500 Ks</option>
+<option>3,850 UC - 206,000 Ks</option>
+<option>8,100 UC - 410,000 Ks</option>
+<option>Mobile Legends Diamonds - Confirm price</option>
+</select>
+<label>Player ID</label>
+<input id="playerId" required placeholder="Enter your game player ID">
+<label>Server ID (if needed)</label>
+<input id="serverId" placeholder="Enter server ID">
+<label>Your Telegram username</label>
+<input id="telegram" required placeholder="@YourUsername">
+<label>Additional details</label>
+<textarea id="details" rows="3" placeholder="Optional message"></textarea>
+<button type="submit">Send Order via Telegram</button>
+</form>
+<p class="note">Your order will open in Telegram for you to review and send. No payment is taken on this website.</p>
+</section>
+</main>
+<footer>© 2026 Oswaldo Digital Shop</footer>
+<script>
+document.getElementById("orderForm").addEventListener("submit",function(e){
+e.preventDefault();
+const msg="NEW ORDER - OSWALDO DIGITAL SHOP\n"+
+"Game: "+document.getElementById("game").value+"\n"+
+"Package: "+document.getElementById("package").value+"\n"+
+"Player ID: "+document.getElementById("playerId").value+"\n"+
+"Server ID: "+document.getElementById("serverId").value+"\n"+
+"Customer Telegram: "+document.getElementById("telegram").value+"\n"+
+"Details: "+document.getElementById("details").value;
+const url="https://t.me/Oswaldo301?text="+encodeURIComponent(msg);
+window.open(url,"_blank");
+});
+</script>
+</body>
+</html>
